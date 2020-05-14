@@ -68,10 +68,7 @@ get(url).then((res) => {
     <i class="icon-angle-down"></i>
     `))
 })
-console.log(2);
-console.log(2);
-console.log(2);
-console.log(2);
+
 var goodsList = null
 var deleteGoods = null
 
