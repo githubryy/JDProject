@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<!-- BEGIN HEAD -->
+
+<head>
+
+	<meta charset="utf-8" />
+
+	<title>商城 | 填写订单</title>
+
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+	<meta content="" name="description" />
+
+	<meta content="" name="author" />
+
+	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+
+	<link href="media/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+	<link href="media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+
+	<link href="media/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+	<link href="media/css/style-metro.css" rel="stylesheet" type="text/css" />
+
+	<link href="media/css/style.css" rel="stylesheet" type="text/css" />
+
+	<link href="media/css/style-responsive.css" rel="stylesheet" type="text/css" />
+
+	<link href="media/css/default.css" rel="stylesheet" type="text/css" id="style_color" />
+
+	<link href="media/css/uniform.default.css" rel="stylesheet" type="text/css" />
+
+	<!-- END GLOBAL MANDATORY STYLES -->
+
+	<!-- BEGIN PAGE LEVEL STYLES -->
+
+	<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/chosen.css" />
+
+	<!-- END PAGE LEVEL STYLES -->
+
+	<link rel="shortcut icon" href="media/image/avitor.png" />
+
+</head>
+
+
+
+<!-- END HEAD -->
+
+<!-- BEGIN BODY -->
+
+<body class="page-header-fixed page-full-width">
+
+	<!-- BEGIN HEADER -->
+
+	<div class="header navbar navbar-inverse navbar-fixed-top">
+
+		<!-- BEGIN TOP NAVIGATION BAR -->
+
+		<div class="navbar-inner">
+
+			<div class="container-fluid">
+
+				<!-- BEGIN LOGO -->
+
+				<a class="brand" href="index.html">
+
+					<span>J D SHOP</span>
+
+				</a>
+
+				<!-- END LOGO -->
+
+				<!-- BEGIN HORIZANTAL MENU -->
+
+				<div class="navbar hor-menu hidden-phone hidden-tablet">
+
+					<div class="navbar-inner">
+
+						<ul class="nav">
+
+
+							<li>
+								<a href="myCenter.html">
+									我的订单
+								</a>
+							</li>
+							<li class="active">
+								<a href="shopCar.html">
+									购物车
+								</a>
+							</li>
+
+							<li>
+								<a href="personInfo.html">个人信息</a>
+							</li>
+
+
+						</ul>
+
+					</div>
+
+				</div>
+
+				<!-- END HORIZANTAL MENU -->
+
+				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+
+				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+
+					<img src="media/image/menu-toggler.png" alt="" />
+
+				</a>
+
+				<!-- END RESPONSIVE MENU TOGGLER -->
+
+				<!-- BEGIN TOP NAVIGATION MENU -->
+
+				<ul class="nav pull-right">
+
+					<!-- BEGIN NOTIFICATION DROPDOWN -->
+
+					<li class="dropdown" id="header_notification_bar">
+
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+							<i class="icon-envelope"></i>
+
+							<span class="badge">6</span>
+
+						</a>
+
+						<ul class="dropdown-menu extended notification">
+
+							<li>
+
+								<p>你有14条信息</p>
+
+							</li>
+
+							<li>
+
+								<a href="#">
+
+									<span class="label label-success"><i class="icon-plus"></i></span>
+
+									欢迎来到京东商城
+
+									<span class="time">刚刚</span>
+
+								</a>
+
+							</li>
+
+							<li>
+
+								<a href="#">
+
+									<span class="label label-important"><i class="icon-bolt"></i></span>
+
+									您的快递已经签收
+
+									<span class="time">15 分钟</span>
+
+								</a>
+
+							</li>
+
+							<li>
+
+								<a href="#">
+
+									<span class="label label-warning"><i class="icon-bell"></i></span>
+
+									你收藏的商品已经降价啦！快去看看
+
+									<span class="time">22 分钟</span>
+
+								</a>
+
+							</li>
+
+							<li>
+
+								<a href="#">
+
+									<span class="label label-info"><i class="icon-bullhorn"></i></span>
+
+									你的好友给你发来2条信息.
+
+									<span class="time">40 分钟</span>
+
+								</a>
+
+							</li>
+
+							<li>
+
+								<a href="#">
+
+									<span class="label label-important"><i class="icon-bolt"></i></span>
+
+									有人刚刚请教你问题.
+
+									<span class="time">2 小时</span>
+
+								</a>
+
+							</li>
+
+							<li>
+
+								<a href="#">
+
+									<span class="label label-important"><i class="icon-bolt"></i></span>
+
+									京东电脑城大降价啦.
+
+									<span class="time">5 小时</span>
+
+								</a>
+
+							</li>
+
+							<li class="external">
+
+								<a href="#">查看更多消息 <i class="m-icon-swapright"></i></a>
+
+							</li>
+
+						</ul>
+
+					</li>
+
+					<!-- END TODO DROPDOWN -->
+
+					<!-- BEGIN USER LOGIN DROPDOWN -->
+
+					<li class="dropdown user">
+
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+							<img id="navUserID" alt="" src=" " />
+
+							<span id="username"> </span>
+
+							<i class="icon-angle-down"></i>
+
+						</a>
+
+						<ul class="dropdown-menu">
+							<li><a href="personInfo.html"><i class="icon-user"></i> 个人信息</a></li>
+
+							<li class="divider"></li>
+
+							<li id="quitchange"><a href="login.html"><i class="icon-retweet"></i> 切换用户</a></li>
+
+							<li class="divider"></li>
+
+							<li id="quit"><a href="index.html"><i class="icon-key"></i> 注销登录</a></li>
+
+						</ul>
+
+					</li>
+					<!-- END USER LOGIN DROPDOWN -->
+
+				</ul>
+
+				<!-- END TOP NAVIGATION MENU -->
+
+			</div>
+
+		</div>
+
+		<!-- END TOP NAVIGATION BAR -->
+
+	</div>
+
+	<!-- END HEADER -->
+
+	<!-- BEGIN CONTAINER -->
+
+	<div class="page-container row-fluid">
+
+
+		<!-- BEGIN PAGE -->
+
+		<div class="page-content">
+
+			<div id="portlet-config" class="modal hide">
+
+				<div class="modal-header">
+
+					<button data-dismiss="modal" class="close" type="button"></button>
+
+					<h3>portlet Settings</h3>
+
+				</div>
+
+				<div class="modal-body">
+
+					<p>Here will be a configuration form</p>
+
+				</div>
+
+			</div>
+
+			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+
+			<div class="container-fluid">
+
+				<!-- BEGIN PAGE HEADER-->
+
+				<div class="row-fluid">
+
+					<div class="span12">
+
+
+						<h3 class="page-title">
+
+							个人中心 <small> <a href="index.html" class="btn red mini">返回京东商城 <i
+										class="icon-circle-arrow-left"></i></a></small>
+
+						</h3>
+
+						<ul class="breadcrumb">
+
+							<li>
+
+								<i class="icon-home"></i>
+
+								<a href="index.html">商城首页</a>
+
+								<i class="icon-angle-right"></i>
+
+							</li>
+
+							<li>
+								<a href="shopCar.html">我的购物车</a>
+
+								<i class="icon-angle-right"></i>
+
+							</li>
+
+
+							<li>
+
+								<a href="">填写订单</a>
+
+							</li>
+
+
+						</ul>
+
+
+					</div>
+
+				</div>
+
+				<div class="row-fluid">
+
+					<div class="span12">
+
+						<div class="portlet box blue" id="form_wizard_1">
+
+							<div class="portlet-title">
+
+								<div class="caption">
+
+									<i class="icon-reorder"></i> 提交订单 - <span class="step-title">步骤 1 </span>
+
+								</div>
+
+								<div class="tools hidden-phone">
+
+									<a href="javascript:;" class="collapse"></a>
+
+									<a href="#portlet-config" data-toggle="modal" class="config"></a>
+
+									<a href="javascript:;" class="reload"></a>
+
+									<a href="javascript:;" class="remove"></a>
+
+								</div>
+
+							</div>
+
+							<div class="portlet-body form">
+
+								<form action="#" class="form-horizontal" id="submit_form">
+
+									<div class="form-wizard">
+
+										<div class="navbar steps">
+
+											<div class="navbar-inner">
+
+												<ul class="row-fluid">
+
+													<li class="span6" style="text-align: center;">
+
+														<a href="#tab1" data-toggle="tab" class="step active">
+
+															<span class="number">1</span>
+
+															<span class="desc"><i class="icon-ok"></i> 填写订单 </span>
+
+														</a>
+
+													</li>
+
+													<li class="span6" style="text-align: center;">
+
+														<a href="#tab2" data-toggle="tab" class="step">
+
+															<span class="number">2</span>
+
+															<span class="desc"><i class="icon-ok"></i> 确认订单</span>
+
+														</a>
+
+													</li>
+
+												</ul>
+
+											</div>
+
+										</div>
+
+										<div id="bar" class="progress progress-success progress-striped">
+
+											<div class="bar"></div>
+
+										</div>
+
+										<div class="tab-content">
+
+											<div class="alert alert-error hide">
+
+												<button class="close" data-dismiss="alert"></button>
+
+												你提交的信息有误，请检查!
+
+											</div>
+
+											<div class="alert alert-success hide">
+
+												<button class="close" data-dismiss="alert"></button>
+
+												你输入的信息检验通过！
+
+											</div>
+
+											<div class="tab-pane active" id="tab1">
+
+												<h4 class="form-section">请确定并填写你的订单</h4>
+
+												<div class="span12">
+
+													<div class="span5">
+
+														<div class="control-group">
+
+															<label class="control-label">收件人<span
+																	class="required">*</span></label>
+
+															<div class="controls">
+
+																<input type="text" placeholder="请提供收件人名字"
+																	class="span6 m-wrap rcvname" name="address" />
+
+															</div>
+
+														</div>
+
+														<div class="control-group">
+
+															<label class="control-label">付款方式</label>
+
+															<div class="controls">
+
+																<select class="span6 select2_category payWay" name="payWay">
+
+																	<option value="支付宝付款">支付宝付款</option>
+
+																	<option value="微信付款">微信付款</option>
+
+																	<option value="银行付款">银行付款</option>
+
+																	<option value="找人代付">找人代付</option>
+
+																</select>
+
+															</div>
+
+														</div>
+
+
+														<div class="control-group">
+
+															<label class="control-label">收件地址<span
+																	class="required">*</span></label>
+
+															<div class="controls">
+
+																<input type="text" placeholder="请提供收件人的收件地址"
+																	class="span6 m-wrap rcvaddress" name="username" />
+
+															</div>
+
+														</div>
+													</div>
+
+													<div class="span6">
+
+														<div class="portlet box red">
+
+															<div class="portlet-title">
+
+																<div class="caption"><i class="icon-briefcase"></i>商品订单表
+																</div>
+
+																<div class="tools">
+
+																	<a href="javascript:;" class="collapse"></a>
+
+																	<a href="javascript:;" class="reload"></a>
+
+																</div>
+
+															</div>
+
+															<div class="portlet-body">
+
+																<table
+																	class="table table-striped table-bordered table-hover"
+																	id="sample_1">
+
+																	<thead>
+
+																		<tr>
+
+																			<th class="hidden-480"><i
+																					class=" icon-file-text"></i> 订单号
+																			</th>
+
+																			<th class="hidden-480"><i
+																					class="icon-briefcase"></i> 商品名</th>
+
+																			<th class="hidden-480"><i
+																					class=" icon-asterisk"></i> 数量</th>
+
+																			<th class="hidden-480"><i
+																					class=" icon-time"></i> 发起时间</th>
+
+																			<th class="hidden-480"><i
+																					class=" icon-jpy"></i> 金额</th>
+
+
+																		</tr>
+
+																	</thead>
+
+																	<tbody class="tabletr">
+
+																		<tr class="odd gradeX">
+
+																			<td>1751625265829</td>
+
+																			<td>shuxer</td>
+
+																			<td>1</td>
+
+																			<td class="hidden-480"><a
+																					href="mailto:shuxer@gmail.com">shuxer@gmail.com</a>
+																			</td>
+
+																			<td class="center hidden-480">12 Jan 2012
+																			</td>
+
+
+																		</tr>
+
+																	</tbody>
+
+																</table>
+
+															</div>
+
+														</div>
+													</div>
+
+												</div>
+
+
+
+
+											</div>
+
+											<div class="tab-pane" id="tab2">
+
+												<h4 class="form-section">请确认你的订单再支付</h4>
+
+												<div class="span12">
+
+													<div class="span5">
+
+														<div class="control-group">
+
+															<label class="control-label">收件人:</label>
+
+															<div class="controls">
+
+																<span class="text display-value"
+																	data-display="address"></span>
+
+															</div>
+
+														</div>
+														<div class="control-group  ">
+
+															<label class="control-label">付款方式:</label>
+
+															<div class="controls">
+
+																<span class="text display-value"
+																	data-display="payWay">
+																</span>
+
+															</div>
+
+														</div>
+														<div class="control-group  ">
+
+															<label class="control-label">收件地址:</label>
+
+															<div class="controls">
+
+																<span class="text display-value"
+																	data-display="username"></span>
+
+															</div>
+
+														</div>
+
+													</div>
+
+													<div class="span6">
+
+														<div class="portlet box red">
+
+															<div class="portlet-title">
+
+																<div class="caption"><i class="icon-briefcase"></i>商品订单表
+																</div>
+
+																<div class="tools">
+
+																	<a href="javascript:;" class="collapse"></a>
+
+																	<a href="javascript:;" class="reload"></a>
+
+																</div>
+
+															</div>
+
+															<div class="portlet-body">
+
+																<table
+																	class="table table-striped table-bordered table-hover"
+																	id="sample_1">
+
+																	<thead>
+
+																		<tr>
+
+																			<th class="hidden-480"><i
+																					class=" icon-file-text"></i> 订单号
+																			</th>
+
+																			<th class="hidden-480"><i
+																					class="icon-briefcase"></i> 商品名</th>
+
+																			<th class="hidden-480"><i
+																					class=" icon-asterisk"></i> 数量</th>
+
+																			<th class="hidden-480"><i
+																					class=" icon-time"></i> 发起时间</th>
+
+																			<th class="hidden-480"><i
+																					class=" icon-jpy"></i> 金额</th>
+
+
+																		</tr>
+
+																	</thead>
+
+																	<tbody class="tabletr">
+
+																		<tr class="odd gradeX">
+
+																			<td>1751625265829</td>
+
+																			<td>shuxer</td>
+
+																			<td>1</td>
+
+																			<td class="hidden-480"><a
+																					href="mailto:shuxer@gmail.com">shuxer@gmail.com</a>
+																			</td>
+
+																			<td class="center hidden-480">12 Jan 2012
+																			</td>
+
+
+																		</tr>
+
+																	</tbody>
+
+																</table>
+
+															</div>
+
+														</div>
+													</div>
+
+												</div>
+
+
+											</div>
+
+										</div>
+
+										<div class="form-actions clearfix">
+
+											<a href="javascript:;" class="btn button-previous">
+
+												<i class="m-icon-swapleft"></i> 返回
+
+											</a>
+
+											<a href="javascript:;" class="btn blue button-next">
+
+												继续 <i class="m-icon-swapright m-icon-white"></i>
+
+											</a>
+
+											<a id="orderPay" href="javascript:;" class="btn green button-submit">
+
+												支付 <i class="icon-shopping-cart m-icon-white"></i>
+
+											</a>
+
+										</div>
+
+									</div>
+
+								</form>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+
+			</div>
+
+
+		</div>
+
+
+	</div>
+
+
+
+	<div class="footer">
+
+		<div class="footer-inner">
+
+			2020 &copy; RYY.e-commerce platfrom.
+		</div>
+
+		<div class="footer-tools">
+
+			<span class="go-top">
+
+				<i class="icon-angle-up"></i>
+
+			</span>
+
+		</div>
+
+	</div>
+
+	<script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+	<!-- 时间格式包 -->
+	<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/moment.js/2.23.0/locale/zh-cn.js"></script>
+
+	<script src="media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+
+	<script src="media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+
+	<script src="media/js/bootstrap.min.js" type="text/javascript"></script>
+
+	<!--[if lt IE 9]>
+
+	<script src="media/js/excanvas.min.js"></script>
+
+	<script src="media/js/respond.min.js"></script>  
+
+	<![endif]-->
+
+	<script src="media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+
+	<script src="media/js/jquery.blockui.min.js" type="text/javascript"></script>
+
+	<script src="media/js/jquery.cookie.min.js" type="text/javascript"></script>
+
+	<script src="media/js/jquery.uniform.min.js" type="text/javascript"></script>
+
+	<!-- END CORE PLUGINS -->
+
+	<!-- BEGIN PAGE LEVEL PLUGINS -->
+
+	<script type="text/javascript" src="media/js/jquery.validate.min.js"></script>
+
+	<script type="text/javascript" src="media/js/additional-methods.min.js"></script>
+
+	<script type="text/javascript" src="media/js/jquery.bootstrap.wizard.min.js"></script>
+
+	<script type="text/javascript" src="media/js/chosen.jquery.min.js"></script>
+
+	<script type="text/javascript" src="media/js/select2.min.js"></script>
+
+	<!-- END PAGE LEVEL PLUGINS -->
+	<script src="media/js/orderSubmit.js"></script>
+
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+
+	<script src="media/js/app.js"></script>
+
+	<script src="media/js/form-wizard.js"></script>
+	
+	<script src="js/orderSubmit.js"></script>
+	<!-- END PAGE LEVEL SCRIPTS -->
+	
+	
+	<script>
+
+		jQuery(document).ready(function () {
+
+			// initiate layout and plugins
+
+			App.init();
+
+			FormWizard.init();
+
+		});
+
+	</script>
+
+
+	<!-- END JAVASCRIPTS -->
+
+	<!-- <script
+		type="text/javascript">  var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-37564768-1']); _gaq.push(['_setDomainName', 'keenthemes.com']); _gaq.push(['_setAllowLinker', true]); _gaq.push(['_trackPageview']); (function () { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();</script> -->
+</body>
+
+<!-- END BODY -->
+
+</html>

@@ -1,0 +1,121 @@
+
+.mainEdit {
+    position: absolute;
+    opacity: 0;
+    top: 10%;
+    left: 200%;
+    background-color: white;
+    width: 900px;
+    height: 700px;
+    margin: 0 auto;
+    box-shadow: 0 0 12px #999;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.head{
+    padding: 10px;
+    width: 900px;
+    height: 30px;
+}
+.canEdit  {
+    width: 600px;
+    height: 600px;
+}
+.imgListEditOut{
+    width: 280px;
+    height: 280px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+.imgListEditOut img{
+    position: relative;
+    box-shadow: 0 0 12px #999;
+    width: 180px;
+    height: 180px;
+}
+.imgListEdit  {
+    width: 280px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    box-shadow: 0 0 12px #999;
+}
+
+.imgListEdit img {
+    position: relative;
+    box-shadow: 0 0 12px #999;
+}
+
+.imgListEdit img:nth-child(1) {
+    width: 180px;
+    height: 180px;
+}
+
+.imgListEdit  img:nth-child(2) {
+    width: 128px;
+    height: 128px;
+}
+
+.imgListEdit  img:nth-child(3) {
+    width: 64px;
+    height: 64px;
+}
+
+.boxEdit  {
+    width: 600px;
+    height: 550px;
+    position: relative;
+    overflow: hidden;
+}
+
+.imgBoxEdit  {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 550px;
+    background: no-repeat;
+}
+
+.backgroundEdit  {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    box-shadow: 0 0 0 300px rgba(0, 0, 0, .5);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.grayEdit  {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 550px;
+    background-color: gray;
+}
+
+#smallEdit ,
+#bigEdit ,
+#confirmEdit  {
+    width: 40px;
+    height: 40px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+#confirmEdit  {
+    width: 60px;
+}
+
+#fileEdit  {
+    outline: none;
+}

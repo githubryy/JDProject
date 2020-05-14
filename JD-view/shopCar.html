@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<!-- BEGIN HEAD -->
+
+<head>
+
+	<meta charset="utf-8" />
+
+	<title>商城 | 购物车</title>
+
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+	<meta content="" name="description" />
+
+	<meta content="" name="author" />
+
+	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+
+	<link href="media/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+	<link href="media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+
+	<link href="media/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+	<link href="media/css/style-metro.css" rel="stylesheet" type="text/css" />
+
+	<link href="media/css/style.css" rel="stylesheet" type="text/css" />
+
+	<!-- <link href="media/css/style-responsive.css" rel="stylesheet" type="text/css" /> -->
+
+	<link href="media/css/default.css" rel="stylesheet" type="text/css" id="style_color" />
+
+	<!-- <link href="media/css/uniform.default.css" rel="stylesheet" type="text/css" /> -->
+
+	<!-- END GLOBAL MANDATORY STYLES -->
+	<!-- <link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" /> -->
+
+	<!-- <link rel="stylesheet" href="media/css/DT_bootstrap.css" /> -->
+
+	<!-- <link rel="stylesheet" type="text/css" href="media/css/jquery-ui-1.10.1.custom.min.css" /> -->
+
+	<link href="media/css/halflings.css" rel="stylesheet" />
+	<link rel="shortcut icon" href="media/image/avitor.png" />
+
+	<!-- <link rel="stylesheet" type="text/css" href="media/css/bootstrap-3.3.4.css"> -->
+
+	<link rel="stylesheet" type="text/css" href="media/css/shopCar.css">
+
+</head>
+
+
+
+<!-- END HEAD -->
+
+<!-- BEGIN BODY -->
+
+<body class="page-header-fixed page-full-width">
+
+	<!-- BEGIN HEADER -->
+
+	<div class="header navbar navbar-inverse navbar-fixed-top">
+
+		<!-- BEGIN TOP NAVIGATION BAR -->
+
+		<div class="navbar-inner">
+
+			<div class="container-fluid">
+
+				<!-- BEGIN LOGO -->
+
+				<a class="brand" href="index.html">
+
+					<span>J D SHOP</span>
+
+				</a>
+
+				<!-- END LOGO -->
+
+				<!-- BEGIN HORIZANTAL MENU -->
+
+				<div class="navbar hor-menu hidden-phone hidden-tablet">
+
+					<div class="navbar-inner">
+
+						<ul class="nav">
+
+							<li class="visible-phone visible-tablet">
+
+								<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+
+								<form class="sidebar-search">
+									<div class="input-box">
+										<a href="javascript:;" class="remove"></a>
+
+										<input type="text" placeholder="Search..." />
+
+										<input type="button" class="submit" value=" " />
+									</div>
+								</form>
+
+								<!-- END RESPONSIVE QUICK SEARCH FORM -->
+
+							</li>
+
+							<li>
+								<a href="myCenter.html">
+									我的订单
+								</a>
+							</li>
+							<li class="active">
+								<a href="shopCar.html">
+									购物车
+								</a>
+							</li>
+
+							<li>
+								<a href="personInfo.html">个人信息</a>
+							</li>
+							<li>
+
+								<span class="hor-menu-search-form-toggler">&nbsp;</span>
+
+								<div class="search-form hidden-phone hidden-tablet">
+
+									<form class="form-search">
+
+										<div class="input-append">
+
+											<input id="text-keyword" type="text" placeholder="搜素" class="m-wrap">
+
+											<button id="btnSearch" type="button" class="btn"></button>
+
+										</div>
+
+									</form>
+
+								</div>
+
+							</li>
+
+						</ul>
+
+					</div>
+
+				</div>
+
+				<!-- END HORIZANTAL MENU -->
+
+				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+
+				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+
+					<img src="media/image/menu-toggler.png" alt="" />
+
+				</a>
+
+				<!-- END RESPONSIVE MENU TOGGLER -->
+
+				<!-- BEGIN TOP NAVIGATION MENU -->
+
+				<ul class="nav pull-right">
+
+					<!-- BEGIN NOTIFICATION DROPDOWN -->
+
+					<li class="dropdown" id="header_notification_bar">
+
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+							<i class="icon-envelope"></i>
+
+							<span class="badge">6</span>
+
+						</a>
+
+						<ul class="dropdown-menu extended notification">
+
+							<li>
+
+								<p>你有14条信息</p>
+
+							</li>
+
+							<li>
+
+								<a href="#">
+
+									<span class="label label-success"><i class="icon-plus"></i></span>
+
+									欢迎来到京东商城
+
+									<span class="time">刚刚</span>
+
+								</a>
+
+							</li>
+
+							<li>
+
+								<a href="#">
+
+									<span class="label label-important"><i class="icon-bolt"></i></span>
+
+									您的快递已经签收
+
+									<span class="time">15 分钟</span>
+
+								</a>
+
+							</li>
+
+							<li>
+
+								<a href="#">
+
+									<span class="label label-warning"><i class="icon-bell"></i></span>
+
+									你收藏的商品已经降价啦！快去看看
+
+									<span class="time">22 分钟</span>
+
+								</a>
+
+							</li>
+
+							<li>
+
+								<a href="#">
+
+									<span class="label label-info"><i class="icon-bullhorn"></i></span>
+
+									你的好友给你发来2条信息.
+
+									<span class="time">40 分钟</span>
+
+								</a>
+
+							</li>
+
+							<li>
+
+								<a href="#">
+
+									<span class="label label-important"><i class="icon-bolt"></i></span>
+
+									有人刚刚请教你问题.
+
+									<span class="time">2 小时</span>
+
+								</a>
+
+							</li>
+
+							<li>
+
+								<a href="#">
+
+									<span class="label label-important"><i class="icon-bolt"></i></span>
+
+									京东电脑城大降价啦.
+
+									<span class="time">5 小时</span>
+
+								</a>
+
+							</li>
+
+							<li class="external">
+
+								<a href="#">查看更多消息 <i class="m-icon-swapright"></i></a>
+
+							</li>
+
+						</ul>
+
+					</li>
+
+					<!-- END TODO DROPDOWN -->
+
+					<!-- BEGIN USER LOGIN DROPDOWN -->
+
+					<li class="dropdown user">
+
+						<a href="#" id="navUserID" class="dropdown-toggle" data-toggle="dropdown">
+
+							<img alt="" src=" " />
+
+							<span class="username"> </span>
+
+							<i class="icon-angle-down"></i>
+
+						</a>
+
+						<ul class="dropdown-menu">
+
+							<li><a href="personInfo.html"><i class="icon-user"></i> 个人信息</a></li>
+
+							<li class="divider"></li>
+
+							<li id="quitchange"><a href="login.html"><i class="icon-retweet"></i> 切换用户</a></li>
+
+							<li class="divider"></li>
+
+							<li id="quit"><a href="index.html"><i class="icon-key"></i> 注销登录</a></li>
+
+						</ul>
+
+					</li>
+					<!-- END USER LOGIN DROPDOWN -->
+
+				</ul>
+
+				<!-- END TOP NAVIGATION MENU -->
+
+			</div>
+
+		</div>
+
+		<!-- END TOP NAVIGATION BAR -->
+
+	</div>
+
+	<!-- END HEADER -->
+
+	<!-- BEGIN CONTAINER -->
+
+	<div class="page-container row-fluid">
+
+
+		<!-- BEGIN PAGE -->
+
+		<div class="page-content">
+
+			<div id="portlet-config" class="modal hide">
+
+				<div class="modal-header">
+
+					<button data-dismiss="modal" class="close" type="button"></button>
+
+					<h3>portlet Settings</h3>
+
+				</div>
+
+				<div class="modal-body">
+
+					<p>Here will be a configuration form</p>
+
+				</div>
+
+			</div>
+
+			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+
+			<div class="container-fluid">
+
+				<!-- BEGIN PAGE HEADER-->
+
+				<div class="row-fluid">
+
+					<div class="span12">
+
+
+						<h3 class="page-title">
+
+							个人中心 <small> <a href="index.html" class="btn red mini">返回京东商城 <i
+										class="icon-circle-arrow-left"></i></a></small>
+
+						</h3>
+
+						<ul class="breadcrumb">
+
+							<li>
+
+								<i class="icon-home"></i>
+
+								<a href="index.html">商城首页</a>
+
+								<i class="icon-angle-right"></i>
+
+							</li>
+
+							<li>
+
+								<a href="#">我的购物车</a>
+
+							</li>
+
+
+						</ul>
+
+
+					</div>
+
+				</div>
+
+
+
+
+
+
+				<div class="row-fluid" style="height:900px;overflow:hidden">
+
+					<div class="span12">
+
+						<div class="shopping-car-container">
+							<div class="row-fluid portlet box red">
+								<div class="portlet-title">
+									<div class="span1 car-menu">
+										<label class="car-menu-input">
+											<input type="checkbox" id="check-goods-all" />
+											<span id="checkAll">全选</span>
+										</label>
+									</div>
+									<div class="span3 car-menu"><i class="icon-bookmark"></i> 商品名</div>
+									<div class="span2 car-menu"><i class="icon-info-sign"></i> 商品参数</div>
+									<div class="span1 car-menu"><i class="icon-jpy"></i> 单价</div>
+									<div class="span2 car-menu"><i class="icon-asterisk"></i> 数量</div>
+									<div class="span1 car-menu"><i class="icon-sitemap"></i> 金额</div>
+									<div class="span2 car-menu"><i class="icon-wrench"></i> 操作</div>
+								</div>
+							</div>
+
+							<div class="goods-content">
+
+							</div>
+							<div class="row-fluid">
+								<div class="bottom-menu-include span12" style="height: 60px;line-height: 60px;">
+									<div class="span1 check-all-bottom bottom-menu">
+										<label class="car-menu-input" style="margin-top: 20px;">
+											<input type="checkbox" id="checked-all-bottom" />
+											<span id="checkAllBottom">全选</span>
+										</label>
+									</div>
+									<div class="span2 bottom-menu">
+										<span id="deleteMulty">
+											<a href="#" class="btn mini red"><i class="icon-trash"></i> 删除选中</a>
+										</span>
+									</div>
+									<div class="span3 bottom-menu">
+
+									</div>
+									<div class="span2 bottom-menu">
+										<span>已选商品 <span id="selectGoodsCount">0</span> 件</span>
+									</div>
+									<div class="span3 bottom-menu">
+										<span>合计：<span>￥</span><span id="selectGoodsMoney">0.00</span></span>
+									</div>
+									<div class="span1 bottom-menu submitData submitDis">
+										<i class="icon-truck"></i>
+										结算
+									</div>
+								</div>
+							</div>
+
+							<div class="modal fade" tabindex="-1" role="dialog" id="deleteItemTip"
+								aria-labelledby="gridSystemModalLabel">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h4 class="modal-title" id="gridSystemModalLabel">提示</h4>
+										</div>
+										<div class="modal-body">
+											确认删除此商品？
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">取消</button>
+											<button type="button" class="btn btn-primary deleteSure">确定</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="modal fade" tabindex="-1" role="dialog" id="selectItemTip"
+								aria-labelledby="gridSystemModalLabel">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h4 class="modal-title" id="gridSystemModalLabel">提示</h4>
+										</div>
+										<div class="modal-body">
+											请选择要删除的商品！
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-primary"
+												data-dismiss="modal">确定</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="modal fade" tabindex="-1" role="dialog" id="deleteMultyTip"
+								aria-labelledby="gridSystemModalLabel">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h4 class="modal-title" id="gridSystemModalLabel">提示</h4>
+										</div>
+										<div class="modal-body">
+											确认删除选择的商品！
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">取消</button>
+											<button type="button" class="btn btn-primary deleteMultySure">确定</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+
+			</div>
+
+
+		</div>
+
+
+	</div>
+
+
+
+	<div class="footer">
+
+		<div class="footer-inner">
+
+			2020 &copy; RYY.e-commerce platfrom.
+		</div>
+
+		<div class="footer-tools">
+
+			<span class="go-top">
+
+				<i class="icon-angle-up"></i>
+
+			</span>
+
+		</div>
+
+	</div>
+
+	<script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+	<script src="media/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="media/js/app.js"></script>
+	<script src="media/js/ui-jqueryui.js"></script>
+
+	<script src="js/shopCar.js"></script>
+
+	<script>
+		jQuery(document).ready(function () {
+			App.init();
+
+		});
+	</script>
+
+	<!-- <script src="media/js/shopCar.js"></script> -->
+	<!-- END JAVASCRIPTS -->
+
+	<!-- <script
+		type="text/javascript">  var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-37564768-1']); _gaq.push(['_setDomainName', 'keenthemes.com']); _gaq.push(['_setAllowLinker', true]); _gaq.push(['_trackPageview']); (function () { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();</script> -->
+</body>
+
+<!-- END BODY -->
+
+</html>
