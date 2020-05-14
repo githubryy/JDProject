@@ -40,7 +40,7 @@ const $quitchange = $('#quitchange')
 const $quit = $('#quit')
 const $navUserID = $('#navUserID')
 
-console.log(1);
+
 
 // 拼接接口 url
 let url = '/api/myorder/shopCarlist?'
@@ -68,7 +68,10 @@ get(url).then((res) => {
     <i class="icon-angle-down"></i>
     `))
 })
-
+console.log(2);
+console.log(2);
+console.log(2);
+console.log(2);
 var goodsList = null
 var deleteGoods = null
 
