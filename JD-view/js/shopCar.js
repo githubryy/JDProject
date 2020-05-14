@@ -40,6 +40,7 @@ const $quitchange = $('#quitchange')
 const $quit = $('#quit')
 const $navUserID = $('#navUserID')
 
+console.log(1);
 
 // 拼接接口 url
 let url = '/api/myorder/shopCarlist?'
