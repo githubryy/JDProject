@@ -79,7 +79,7 @@ function orderLoad(url) {
         // 遍历博客列表，并显示
         const data = res.data || []
         $tabletr.empty()
-        console.log('data', data);
+        // console.log('data', data);
         data.forEach(item => {
             $tabletr.append($(`
             <tr class="odd gradeX">
@@ -134,7 +134,6 @@ $btnSearch.click(() => {
     }
 
 })
-
 // 删除
 var targetVal = null
 $tabletr.click((e => {

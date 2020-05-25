@@ -377,8 +377,9 @@ var ordernum = null
 var status = null
 var username = null
 var createtime = null
+var dataId = null
 var sessionObj = []
-var momentObj = { name, price, count, ordernum, status, username, createtime }
+var momentObj = { name, price, count, ordernum, status, username, createtime ,dataId}
 $('.bottom-menu-include').on('click', '.submitData', function () {
     if (!$('.submitData').hasClass('submitDis')) {
         window.location.href = "orderSubmit.html"
@@ -400,6 +401,7 @@ $('.bottom-menu-include').on('click', '.submitData', function () {
         sessionObj[i].status = '待支付'
         sessionObj[i].username = $('.username').text()
         sessionObj[i].createtime = nowTime
+        sessionObj[i].dataId = $('.goods-list-item:checked').eq(i).attr('data-id')
     }
     console.log('sessionObj', sessionObj);
     const url = '/api/myorder/submitOrder'

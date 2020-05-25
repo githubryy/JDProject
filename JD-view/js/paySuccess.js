@@ -48,7 +48,7 @@ get(url).then((res) => {
     }
     // 遍历博客列表，并显示
     const data = res.data || []
-    console.log('data', data);
+    // console.log('data', data);
     $navUserID.attr('src', res.data[0].userImgurl)
     $username.text(res.data[0].realname)
 

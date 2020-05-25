@@ -71,9 +71,14 @@ function orderUp() {
 }
 $orderPay.click(() => {
 
-    this.orderUp()
-    location.href = 'paySuccess.html'
-    console.log('$payWay.val()', $payWay.val(), $rcvaddress.val(), $rcvname.val());
+
+    if (confirm('确定支付？')) {
+        this.orderUp()
+        location.href = 'paySuccess.html'
+        console.log('$payWay.val()', $payWay.val(), $rcvaddress.val(), $rcvname.val());
+    }
+
+   
 })
 
 
@@ -101,7 +106,7 @@ function orderLoad(url2) {
         // 遍历博客列表，并显示
         const data = res.data || []
         $tabletr.empty()
-        console.log('data', data);
+        // console.log('data', data);
 
         data.forEach(item => {
             $tabletr.append($(`

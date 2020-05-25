@@ -62,7 +62,7 @@ get(url).then((res) => {
     }
     // 遍历博客列表，并显示
     const data = res.data || []
-    console.log('data', data);
+    // console.log('data', data);
     $dataId.attr('data-id', res.data[0].id)
     $navUserID.attr('src', res.data[0].userImgurl)
     $username.text(res.data[0].username)

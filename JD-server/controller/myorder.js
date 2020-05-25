@@ -49,6 +49,8 @@ const submitOrder = (sessionObj = {}) => {
         insert into ordersession (count,createtime,username,ordernum,name,price,status)
         values ('${item.count}','${item.createtime}','${item.username}','${item.ordernum}','${item.name}','${item.price}','${item.status}')
     `   
+        const delSql = `delete from shopCar where id = '${item.dataId}'`
+        exec(delSql)
         return exec(sql)
     });
 }
