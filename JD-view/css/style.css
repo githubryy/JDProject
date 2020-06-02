@@ -169,7 +169,7 @@ div#xq{margin-left: 100px;}
 	.si{ width: 200px;display: flex;margin-top: 20px;}
 	.si p{font-size: 14px;margin-bottom: 10px;  overflow: hidden;text-overflow: ellipsis;white-space:nowrap;}
 	.si span{color: red;font-size: 18px;margin-left: 27px;}
-	.six ul li img{position: relative;left: 40px;}
+	.six ul li img{position: relative;left:20px;}
 	.napr{height: 60px;width: 60%;border-top: lightgrey solid 1px;}
 	.addShopCar{height: 60px;background-color: #ff8f00;    
 		text-align: center;
@@ -177,7 +177,10 @@ div#xq{margin-left: 100px;}
 		font-size: 14px;
 		font-weight: bold;
 		color: white;
+		cursor:pointer;
 	}
+	.favorite{width: 40px;height: 40px;float: right;font-size:25px;text-align: center;line-height: 40px;  color:#ccc; cursor:pointer;}
+	.cs{color:#f00;}
 /* 京东品质生活 */
 	.life-center{background-color: #f7f7f7;margin-bottom: 30px;border: 1px solid #ccc;border-bottom: none;}
 	.life-center a{display: block;}

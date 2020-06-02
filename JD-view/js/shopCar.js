@@ -32,13 +32,16 @@ function getUrlParams() {
     return result
 }
 
+const $quitchange = $('#quitchange')
+const $quit = $('#quit')
+const $navUserID = $('#navUserID')
+const $username = $('#username')
+
 const $btnSearch = $('#btnSearch')
 const $textKeyword = $('#text-keyword')
 const $goodscontent = $('.goods-content')
 
-const $quitchange = $('#quitchange')
-const $quit = $('#quit')
-const $navUserID = $('#navUserID')
+
 
 
 
@@ -50,8 +53,8 @@ const urlParams = getUrlParams(url)
 if (urlParams.keyword) {
     url += '&keyword=' + urlParams.keyword
 }
-
-get(url).then((res) => {
+let url2 = '/api/user/access?'
+get(url2).then((res) => {
     if (res.errno !== 0) {
         alert('数据错误')
         return
@@ -59,14 +62,8 @@ get(url).then((res) => {
     // 遍历博客列表，并显示
     const data = res.data || []
     // console.log('data11', data);
-    $navUserID.empty()
-    $navUserID.append($(`
-    <img alt="" src="${res.data[0].userImgurl}" />
-
-    <span  class="username">${res.data[0].username} </span>
-
-    <i class="icon-angle-down"></i>
-    `))
+    $navUserID.attr('src', res.data[0].userImgurl?res.data[0].userImgurl:"media/image/avitor.png")
+    $username.text(res.data[0].username)
 })
 
 var goodsList = null
@@ -116,6 +113,7 @@ function blogLoad(url) {
         }
         // 遍历博客列表，并显示
         const data = res.data || []
+
         $goodscontent.empty()
         console.log('data11111111', data);
         goodsList = data

@@ -48,7 +48,8 @@ const $orderPay = $('#orderPay')
 
 function orderUp() {
     const payway = $payWay.val()
-    const username = $rcvname.val()
+    const username = $username.text()
+    const rcvperson = $rcvname.val()
     const rcvaddress = $rcvaddress.val()
     const status = '已支付'
 
@@ -57,6 +58,7 @@ function orderUp() {
     const data = {
         payway,
         username,
+        rcvperson,
         rcvaddress,
         status
     }
@@ -90,8 +92,8 @@ get(url).then((res) => {
     // 遍历博客列表，并显示
     const data = res.data || []
     console.log('data', data);
-    $navUserID.attr('src', res.data[0].userImgurl)
-    $username.text(res.data[0].realname)
+    $navUserID.attr('src', res.data[0].userImgurl?res.data[0].userImgurl:"media/image/avitor.png")
+    $username.text(res.data[0].username)
 
 })
 const url2 = '/api/myorder/getOrderSessionList?'

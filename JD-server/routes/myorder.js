@@ -33,7 +33,7 @@ router.get('/list', loginCheck, (req, res, next) => {
             )
             return
         }
-        // 强制查询自己的博客
+        // 强制查询自己的订单
         username = req.session.username
     }
     const result = getList(username, keyword)
@@ -61,7 +61,7 @@ router.get('/shopCarlist', loginCheck, (req, res, next) => {
             )
             return
         }
-        // 强制查询自己的博客
+        // 强制查询自己的订单
         username = req.session.username
     }
     const result = getShopCarList(username, keyword)

@@ -2,7 +2,7 @@ const xss = require('xss')
 const { exec } = require('../db/mysql')
 
 const getList = (username, keyword) => {
-    let sql = `select myorder.id,myorder.username,myorder.rcvaddress,myorder.count,myorder.createtime,myorder.ordernum,myorder.name,myorder.price,myorder.status,users.userImgurl from myorder left join users on myorder.username = users.username where 1=1  `
+    let sql = `select myorder.id,myorder.username,myorder.rcvperson,myorder.rcvaddress,myorder.count,myorder.createtime,myorder.ordernum,myorder.name,myorder.price,myorder.status,users.userImgurl from myorder left join users on myorder.username = users.username where 1=1  `
     if (username) {
         sql += `and myorder.username='${username}' `
     }
@@ -58,6 +58,7 @@ const orderPay = (orderdata = {}) => {
 
     const payway = xss(orderdata.payway)
     const username = xss(orderdata.username)
+    const rcvperson = xss(orderdata.rcvperson)
     const rcvaddress = xss(orderdata.rcvaddress)
     const status = xss(orderdata.status)
 
@@ -65,6 +66,7 @@ const orderPay = (orderdata = {}) => {
         update ordersession set 
         payway='${payway}', 
         username='${username}', 
+        rcvperson='${rcvperson}', 
         rcvaddress='${rcvaddress}',
         status='${status}'
     `
@@ -90,60 +92,6 @@ const getDetail = (id) => {
         return rows[0]
     })
 }
-
-const newBlog = (blogData = {}) => {
-    // blogData 是一个博客对象，包含 title content username 属性
-    const title = xss(blogData.title)
-    // console.log('title is', title)
-    const content = xss(blogData.content)
-    const username = blogData.username
-    const createTime = Date.now()
-
-    const sql = `
-        insert into myorder (title, content, createtime, username)
-        values ('${title}', '${content}', ${createTime}, '${username}')
-    `
-
-    return exec(sql).then(insertData => {
-        // console.log('insertData is ', insertData)
-        return {
-            id: insertData.insertId
-        }
-    })
-}
-
-const updateBlog = (id, blogData = {}) => {
-    // id 就是要更新博客的 id
-    // blogData 是一个博客对象，包含 title content 属性
-
-    const title = xss(blogData.title)
-    const content = xss(blogData.content)
-
-    const sql = `
-        update myorder set title='${title}', content='${content}' where id=${id}
-    `
-
-    return exec(sql).then(updateData => {
-        // console.log('updateData is ', updateData)
-        if (updateData.affectedRows > 0) {
-            return true
-        }
-        return false
-    })
-}
-
-const delBlog = (id, username) => {
-    // id 就是要删除博客的 id
-    const sql = `delete from myorder where id='${id}' and username='${username}';`
-    return exec(sql).then(delData => {
-        // console.log('delData is ', delData)
-        if (delData.affectedRows > 0) {
-            return true
-        }
-        return false
-    })
-}
-
 const delShopCar = (id, username) => {
     // id 就是要删除博客的 id
     const sql = `delete from shopCar where id='${id}' and username='${username}';`
@@ -164,8 +112,5 @@ module.exports = {
     orderPay,
     addShopCar,
     getDetail,
-    newBlog,
-    updateBlog,
-    delBlog,
     delShopCar
 }

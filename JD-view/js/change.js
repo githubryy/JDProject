@@ -1,4 +1,8 @@
-
+$(function () {            
+	$(".favorite").click(function () {
+		$(this).toggleClass('cs');                
+	})
+})
 // 发送 get 请求
 function get(url) {
 	return $.get(url)
@@ -63,7 +67,7 @@ $('.addShopCar').on('click', function () {
     }
     post(url2, data).then(res => {
         if (res.errno !== 0) {
-            alert('操作错误')
+            alert('请登录！')
             return
         }
         alert('加入购物车成功！')
@@ -94,7 +98,7 @@ get(url).then(res => {
 			${res.data[0].username}
 			<div class="divCircle">
                 <img class="circleImg"
-                src="${res.data[0].userImgurl}" />
+                src="${res.data[0].userImgurl?res.data[0].userImgurl:"media/image/avitor.png"}" />
         	</div>
 		</a>
 		`))

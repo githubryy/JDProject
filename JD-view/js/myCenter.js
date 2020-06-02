@@ -40,6 +40,7 @@ const $btnSearch = $('#btnSearch')
 const $quitchange = $('#quitchange')
 const $quit = $('#quit')
 const $navUserID = $('#navUserID')
+const $username = $('#username')
 const $itemdel = $('#item-del')
 
 // 拼接接口 url
@@ -51,22 +52,17 @@ if (urlParams.keyword) {
     url += '&keyword=' + urlParams.keyword
 }
 
-get(url).then((res) => {
+let url2 = '/api/user/access?'
+get(url2).then((res) => {
     if (res.errno !== 0) {
         alert('数据错误')
         return
     }
     // 遍历博客列表，并显示
     const data = res.data || []
-    // console.log('data', data);
-    $navUserID.empty()
-    $navUserID.append($(`
-    <img alt="" src="${res.data[0].userImgurl}" />
-
-    <span  class="username">${res.data[0].username} </span>
-
-    <i class="icon-angle-down"></i>
-    `))
+    // console.log('data11', data);
+    $navUserID.attr('src', res.data[0].userImgurl?res.data[0].userImgurl:"media/image/avitor.png")
+    $username.text(res.data[0].username)
 })
 
 // 封装订单加载数据
@@ -93,7 +89,7 @@ function orderLoad(url) {
                 <td class="hidden-480"><a
                     href="mailto:shuxer@gmail.com">${getFormatDate(item.createtime)}</a></td>
 
-                <td class="hidden-480">${item.username}</td>
+                <td class="hidden-480">${item.rcvperson}</td>
 
                 <td class="center hidden-480">${item.price}.00</td>
 
