@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const {
+    getGoodsList,
     getList,
     getShopCarList,
     getOrderSessionList,
@@ -8,13 +9,22 @@ const {
     orderPay,
     addShopCar,
     getDetail,
-    newBlog,
-    updateBlog,
-    delBlog,
+    editFavorite,
     delShopCar
 } = require('../controller/myorder')
 const { SuccessModel, ErrorModel } = require('../model/resModel')
 const loginCheck = require('../middleware/loginCheck')
+
+router.get('/goodslist', (req, res, next) => {
+
+    const result = getGoodsList()
+    return result.then(listData => {
+        // console.log('getGoodsList', listData);
+        res.json(
+            new SuccessModel(listData)
+        )
+    })
+});
 
 router.get('/list', loginCheck, (req, res, next) => {
     let username = req.session.username || ''
@@ -23,10 +33,10 @@ router.get('/list', loginCheck, (req, res, next) => {
     // console.log('keyword', keyword);
 
     if (req.query.isadmin) {
-        console.log('is admin')
+        // console.log('is admin')
         // 管理员界面
         if (req.session.username == null) {
-            console.error('is admin, but no login')
+            // console.error('is admin, but no login')
             // 未登录
             res.json(
                 new ErrorModel('未登录')
@@ -51,10 +61,10 @@ router.get('/shopCarlist', loginCheck, (req, res, next) => {
     // console.log('keyword', keyword);
 
     if (req.query.isadmin) {
-        console.log('is admin')
+        // console.log('is admin')
         // 管理员界面
         if (req.session.username == null) {
-            console.error('is admin, but no login')
+            // console.error('is admin, but no login')
             // 未登录
             res.json(
                 new ErrorModel('未登录')
@@ -117,47 +127,10 @@ router.get('/detail', (req, res, next) => {
     })
 });
 
-router.post('/new', loginCheck, (req, res, next) => {
-    req.body.username = req.session.username
-    const result = newBlog(req.body)
-    return result.then(data => {
-        res.json(
-            new SuccessModel(data)
-        )
-    })
-})
-
-router.post('/update', loginCheck, (req, res, next) => {
-    const result = updateBlog(req.query.id, req.body)
-    return result.then(val => {
-        if (val) {
-            res.json(
-                new SuccessModel()
-            )
-        } else {
-            res.json(
-                new ErrorModel('更新信息失败')
-            )
-        }
-    })
-})
-
-router.post('/del', loginCheck, (req, res, next) => {
+router.post('/favorite', loginCheck, (req, res, next) => {
     const username = req.session.username
-    const result = delBlog(req.query.id, username)
-    return result.then(val => {
-        if (val) {
-            res.json(
-                new SuccessModel()
-            )
-        } else {
-            res.json(
-                new ErrorModel('删除订单失败')
-            )
-        }
-    })
+    const result = editFavorite(req.body,username)
 })
-
 router.post('/delShopCar', loginCheck, (req, res, next) => {
     const username = req.session.username
     const result = delShopCar(req.query.id, username)

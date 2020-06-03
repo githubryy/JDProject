@@ -1,6 +1,14 @@
 const xss = require('xss')
 const { exec } = require('../db/mysql')
 
+const getGoodsList = (goodsinfo) => {
+    let sql = `select * from goods where 1=1  `
+    if (goodsinfo) {
+        sql += `and goods.goodsinfo='${goodsinfo}' `
+    }
+    // 返回 promise
+    return exec(sql)
+}
 const getList = (username, keyword) => {
     let sql = `select myorder.id,myorder.username,myorder.rcvperson,myorder.rcvaddress,myorder.count,myorder.createtime,myorder.ordernum,myorder.name,myorder.price,myorder.status,users.userImgurl from myorder left join users on myorder.username = users.username where 1=1  `
     if (username) {
@@ -15,7 +23,6 @@ const getList = (username, keyword) => {
 
     return exec(sql)
 }
-
 const getShopCarList = (username, keyword) => {
     let sql = `select shopcar.id,shopcar.username,shopcar.goodsCount,shopcar.goodsInfo,shopcar.goodsParams,shopcar.goodsimgUrl,shopcar.price,users.userImgurl from shopCar left join users on shopCar.username = users.username where 1=1 `
     if (username) {
@@ -34,7 +41,6 @@ const getShopCarList = (username, keyword) => {
     // 返回 promise
     return exec(sql)
 }
-
 const getOrderSessionList = () => {
     let sql = `select * from ordersession `
     // 返回 promise
@@ -48,13 +54,13 @@ const submitOrder = (sessionObj = {}) => {
         const sql = `
         insert into ordersession (count,createtime,username,ordernum,name,price,status)
         values ('${item.count}','${item.createtime}','${item.username}','${item.ordernum}','${item.name}','${item.price}','${item.status}')
-    `   
+    `
         const delSql = `delete from shopCar where id = '${item.dataId}'`
         exec(delSql)
         return exec(sql)
     });
 }
-const orderPay = (orderdata = {}) => {  
+const orderPay = (orderdata = {}) => {
 
     const payway = xss(orderdata.payway)
     const username = xss(orderdata.username)
@@ -71,12 +77,12 @@ const orderPay = (orderdata = {}) => {
         status='${status}'
     `
     exec(sql)
-    const sql2 =`insert into myorder select * from ordersession`
-        return exec(sql2)
+    const sql2 = `insert into myorder select * from ordersession`
+    return exec(sql2)
 
 }
-const addShopCar = (addShopCar = {}) => {  
-    const sql =` insert into shopCar (goodsInfo, goodsParams, price, goodsimgUrl,goodsCount,username)
+const addShopCar = (addShopCar = {}) => {
+    const sql = ` insert into shopCar (goodsInfo, goodsParams, price, goodsimgUrl,goodsCount,username)
     values ('${addShopCar.goodsInfo}', '${addShopCar.goodsParams}', ${addShopCar.price}, '${addShopCar.goodsimgUrl}','${addShopCar.goodsCount}','${addShopCar.username}')`
     return exec(sql).then(updateData => {
         // console.log('updateData is ', updateData)
@@ -92,6 +98,22 @@ const getDetail = (id) => {
         return rows[0]
     })
 }
+const editFavorite = (editFObj = {}, username) => {
+
+    const sql = `select favoriteperson from goods where id ='${editFObj.id}'`
+    var favoriteperson = null
+    exec(sql).then(people => {
+        var usernamef = people[0].favoriteperson
+        if (editFObj.flagf === 0) {
+            favoriteperson = usernamef.replace(username, '')
+        } else if (editFObj.flagf === 1) {
+            favoriteperson = usernamef.concat(username)
+        }
+    }).then(() => {
+        const sqlchange = `update goods set favoriteperson = '${favoriteperson}'  where id ='${editFObj.id}' `
+        return exec(sqlchange)
+    })
+}
 const delShopCar = (id, username) => {
     // id 就是要删除博客的 id
     const sql = `delete from shopCar where id='${id}' and username='${username}';`
@@ -105,6 +127,7 @@ const delShopCar = (id, username) => {
 }
 
 module.exports = {
+    getGoodsList,
     getList,
     getShopCarList,
     getOrderSessionList,
@@ -112,5 +135,6 @@ module.exports = {
     orderPay,
     addShopCar,
     getDetail,
+    editFavorite,
     delShopCar
 }

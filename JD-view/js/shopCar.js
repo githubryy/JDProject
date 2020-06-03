@@ -62,7 +62,7 @@ get(url2).then((res) => {
     // 遍历博客列表，并显示
     const data = res.data || []
     // console.log('data11', data);
-    $navUserID.attr('src', res.data[0].userImgurl?res.data[0].userImgurl:"media/image/avitor.png")
+    $navUserID.attr('src', res.data[0].userImgurl ? res.data[0].userImgurl : "media/image/avitor.png")
     $username.text(res.data[0].username)
 })
 
@@ -377,7 +377,7 @@ var username = null
 var createtime = null
 var dataId = null
 var sessionObj = []
-var momentObj = { name, price, count, ordernum, status, username, createtime ,dataId}
+var momentObj = { name, price, count, ordernum, status, username, createtime, dataId }
 $('.bottom-menu-include').on('click', '.submitData', function () {
     if (!$('.submitData').hasClass('submitDis')) {
         window.location.href = "orderSubmit.html"

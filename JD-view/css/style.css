@@ -1,4 +1,11 @@
 ﻿/* 公共属性	 */
+	/* 优化点击蓝色阴影 */
+	div,a,img { 
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select:none;
+	}
 	*{margin:0;padding: 0}
 	ul li{list-style: none;}
 	a{color: black;text-decoration: none;}
@@ -162,14 +169,14 @@ div#xq{margin-left: 100px;}
 	    line-height: 40px;}
 	.bt span{background: url(../image/1.png) 0 -97px no-repeat;display: inline-block;width: 425px;height: 30px;vertical-align: bottom}
 	.bt h2{display: inline-block;}
-	.bt small{background: url(../image/shuaxin.jpg) 0 0px no-repeat;display: inline-block;width: 22px;height: 22px;    position: relative;
+	.bt small{background: url(../image/shuaxin.jpg) 0 0px no-repeat;display: inline-block;width: 22px;height: 22px; position: relative;
 	    top: 9px;}
 	.six{height: 233px;margin-top: 40px;}
 	.six ul{width: 200.5px;height: 233px;	}
 	.si{ width: 200px;display: flex;margin-top: 20px;}
 	.si p{font-size: 14px;margin-bottom: 10px;  overflow: hidden;text-overflow: ellipsis;white-space:nowrap;}
 	.si span{color: red;font-size: 18px;margin-left: 27px;}
-	.six ul li img{position: relative;left:20px;}
+	.six ul li img{position: relative;left:20px;width: 130px;height: 130px;}
 	.napr{height: 60px;width: 60%;border-top: lightgrey solid 1px;}
 	.addShopCar{height: 60px;background-color: #ff8f00;    
 		text-align: center;
