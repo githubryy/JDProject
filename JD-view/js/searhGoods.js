@@ -1,4 +1,3 @@
-
 // 发送 get 请求
 function get(url) {
 	return $.get(url)
@@ -28,14 +27,18 @@ function getUrlParams() {
 // 拼接接口 url
 let url = '/api/user/access?isadmin=1'  // 增加一个 isadmin=1 参数，使用登录者的用户名，后端也需要修改 ！！！
 let url2 = '/api/myorder/addShopCar?'
-let urlgoods = '/api/myorder/goodslist'
+let urlgoods = '/api/myorder/goodslist?'
 let urlfavorite = '/api/myorder/favorite'
 let urlquit = '/api/user/logout'
-
+console.log('window.location.pathname',window.location.search.split('?')[1] || '');
+let params = window.location.search.split('?')[1] || ''
 const urlParams = getUrlParams()
 if (urlParams.keyword) {
-	url += '&keyword=' + urlParams.keyword
+	urlgoods += '&keyword=' + urlParams.keyword	
+}else if(params){
+	urlgoods += '&keyword=' + params
 }
+console.log('urlgoods',urlgoods);
 const $loginStatus = $('#loginStatus')
 const $loginStatus2 = $('#loginStatus2')
 const $myOrder = $('#myOrder')
@@ -84,8 +87,6 @@ get(url).then(res => {
 		// console.log("$quit.text('退出登录')",$quit.text());
 	}
 })
-
-
 // 加载商品信息
 function loadGoods() {
 	
@@ -124,22 +125,25 @@ function loadGoods() {
 	
 	$('#addUl').append('<div class="cb"></div>')
 }
-var _this = this
-get(urlgoods).then((res) => {
-	if (res.errno !== 0) {
-		alert('商品加载数据错误')
-		return
-	}
-	// 遍历博客列表，并显示
-	const data = res.data || []
-
-	$addUl.empty()
-
-	goodsList = data
-	
-	loadGoods()
-
-})
+function initData(){
+	get(urlgoods).then((res) => {
+		if (res.errno !== 0) {
+			alert('商品加载数据错误')
+			return
+		}
+		// 遍历博客列表，并显示
+		const data = res.data || []
+		 console.log(res.data);
+		$addUl.empty()
+		if(res.data.length<1){
+			console.log(1);
+			$('#addUl').append('<h1>暂无该商品的相关信息</h1>')
+		}
+		goodsList = data
+		loadGoods()
+	})
+}
+window.onload = initData()
 //点击收藏
 var flagf = 0
 $('#addUl').on('click','.favorite',function(){
@@ -198,10 +202,14 @@ $quit.click(() => {
 	get(urlquit)
 	window.location='index.html'
 })
-
-//搜索
-
+// 搜索
 $('.submit').on('click',function(){
 	var params = $('.text').val()
-	window.location='searchGoods.html?'+ params
+	console.log('keyword',params);
+	urlgoods = '/api/myorder/goodsList?'
+    if (params || params === '') {
+        urlgoods += 'keyword=' + params
+        initData()
+        urlgoods = '/api/myorder/goodsList?'
+    }
 })
