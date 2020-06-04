@@ -10,14 +10,16 @@ const {
     addShopCar,
     getDetail,
     editFavorite,
-    delShopCar
+    delShopCar,
+    delFavorite
 } = require('../controller/myorder')
 const { SuccessModel, ErrorModel } = require('../model/resModel')
 const loginCheck = require('../middleware/loginCheck')
 
 router.get('/goodslist', (req, res, next) => {
-
-    const result = getGoodsList()
+    const username = req.query.username || ''
+    const keyword = req.query.keyword || ''
+    const result = getGoodsList(username, keyword)
     return result.then(listData => {
         // console.log('getGoodsList', listData);
         res.json(
@@ -57,9 +59,6 @@ router.get('/list', loginCheck, (req, res, next) => {
 router.get('/shopCarlist', loginCheck, (req, res, next) => {
     let username = req.session.username || ''
     const keyword = req.query.keyword || ''
-    // console.log('username', username);
-    // console.log('keyword', keyword);
-
     if (req.query.isadmin) {
         // console.log('is admin')
         // 管理员界面
@@ -105,18 +104,8 @@ router.post('/orderPay', loginCheck, (req, res, next) => {
     return result
 });
 router.post('/addShopCar', loginCheck, (req, res, next) => {
-    const result = addShopCar(req.body)
-    return result.then(val => {
-        if (val) {
-            res.json(
-                new SuccessModel()
-            )
-        } else {
-            res.json(
-                new ErrorModel('加入购物车失败')
-            )
-        }
-    })
+     return addShopCar(req.body)
+       
 });
 router.get('/detail', (req, res, next) => {
     const result = getDetail(req.query.id)
@@ -126,7 +115,6 @@ router.get('/detail', (req, res, next) => {
         )
     })
 });
-
 router.post('/favorite', loginCheck, (req, res, next) => {
     const username = req.session.username
     const result = editFavorite(req.body,username)
@@ -146,6 +134,20 @@ router.post('/delShopCar', loginCheck, (req, res, next) => {
         }
     })
 })
-
+router.post('/delFavorite', loginCheck, (req, res, next) => {
+    const username = req.session.username
+    const result = delFavorite(req.query.id, username)
+    return result.then(val => {
+        if (val) {
+            res.json(
+                new SuccessModel()
+            )
+        } else {
+            res.json(
+                new ErrorModel('取消收藏商品失败')
+            )
+        }
+    })
+})
 
 module.exports = router;

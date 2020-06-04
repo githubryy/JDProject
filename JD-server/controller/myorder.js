@@ -1,11 +1,15 @@
 const xss = require('xss')
 const { exec } = require('../db/mysql')
 
-const getGoodsList = (goodsinfo) => {
+const getGoodsList = (username, keyword) => {
     let sql = `select * from goods where 1=1  `
-    if (goodsinfo) {
-        sql += `and goods.goodsinfo='${goodsinfo}' `
+    if (username) {
+        sql += `and goods.favoriteperson like '%${username}%' `
     }
+    if (keyword) {
+        sql += `and goodsinfo like '%${keyword}%' `
+    }
+    sql += `order by id desc;`
     // 返回 promise
     return exec(sql)
 }
@@ -82,15 +86,19 @@ const orderPay = (orderdata = {}) => {
 
 }
 const addShopCar = (addShopCar = {}) => {
-    const sql = ` insert into shopCar (goodsInfo, goodsParams, price, goodsimgUrl,goodsCount,username)
-    values ('${addShopCar.goodsInfo}', '${addShopCar.goodsParams}', ${addShopCar.price}, '${addShopCar.goodsimgUrl}','${addShopCar.goodsCount}','${addShopCar.username}')`
-    return exec(sql).then(updateData => {
-        // console.log('updateData is ', updateData)
-        if (updateData.affectedRows > 0) {
-            return true
-        }
-        return false
-    })
+    // console.log('addShopCar',addShopCar);
+    return addShopCar.forEach(item =>{
+        const sql = ` insert into shopCar (goodsInfo, goodsParams, price, goodsimgUrl,goodsCount,username,crtTime)
+        values ('${item.goodsInfo}', '${item.goodsParams}', ${item.price},'${item.goodsimgUrl}', '${item.goodsCount}','${item.username}','${item.crtTime}')`
+        
+        return exec(sql).then(delData => {
+            // console.log('delData is ', delData)
+            if (delData.affectedRows > 0) {
+                return true
+            }
+            return false
+        })
+    })  
 }
 const getDetail = (id) => {
     const sql = `select * from myorder where id='${id}'`
@@ -99,7 +107,6 @@ const getDetail = (id) => {
     })
 }
 const editFavorite = (editFObj = {}, username) => {
-
     const sql = `select favoriteperson from goods where id ='${editFObj.id}'`
     var favoriteperson = null
     exec(sql).then(people => {
@@ -115,7 +122,7 @@ const editFavorite = (editFObj = {}, username) => {
     })
 }
 const delShopCar = (id, username) => {
-    // id 就是要删除博客的 id
+    // id 就是要删除收藏商品的id
     const sql = `delete from shopCar where id='${id}' and username='${username}';`
     return exec(sql).then(delData => {
         // console.log('delData is ', delData)

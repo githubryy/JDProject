@@ -103,7 +103,7 @@ function orderLoad(url) {
                 
                 class="popovers btn mini blue item-seeAddress">
 
-                <i class="icon-hand-up"></i> 查看收货地址</button> |
+                <i class="icon-comments"></i> 评论 </button> |
 
                 <a data-id="${item.id}" class="btn mini black item-del"><i class="icon-trash"></i> 删除记录</a>
                 

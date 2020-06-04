@@ -29,6 +29,7 @@ let url = '/api/user/access?isadmin=1'  // 增加一个 isadmin=1 参数，使�
 let url2 = '/api/myorder/addShopCar?'
 let urlgoods = '/api/myorder/goodslist'
 let urlfavorite = '/api/myorder/favorite'
+let urlquit = '/api/user/logout'
 
 const urlParams = getUrlParams()
 if (urlParams.keyword) {
@@ -39,12 +40,13 @@ const $loginStatus2 = $('#loginStatus2')
 const $myOrder = $('#myOrder')
 const $gwc = $('.gwc')
 const $addUl = $('#addUl')
+const $quit = $('#quit')
 var goodsList = null
 var username = $('#loginStatus2').find('span').text()
 
 // 加载用户信息
 get(url).then(res => {
-	console.log('res', res.data);
+	// console.log('res', res.data);
 	if (res.errno !== 0) {
 		$loginStatus.append($(`
 		<a href="/login.html">您好，请登录</a>
@@ -54,10 +56,8 @@ get(url).then(res => {
 		`))
 		$myOrder.append($(`
 		<a href="/login.html">个人中心</a>
-		`
-			,
-			alert('为了您的使用体验,请登录!!!')
-		))
+		`))
+		alert('为了您的使用体验,请登录!!!')
 		return
 	} else {
 		$loginStatus.append($(`    
@@ -79,7 +79,8 @@ get(url).then(res => {
 		))
 		$gwc.empty()
 		$gwc.append($(`<a href="/shopCar.html"><p class="mydiv"><span></span>我的购物车</p></a>`))
-
+		$quit.text('退出登录')
+		// console.log("$quit.text('退出登录')",$quit.text());
 	}
 })
 
@@ -88,14 +89,11 @@ get(url).then(res => {
 function loadGoods() {
 	
 	var username = $('#loginStatus2').find('span').text()
-	console.log('username', username);
 	if(!username){
 		username = '无'
-		
 	}
 	$.each(goodsList, function (i, item) {
-		console.log('item',item);
-		
+		// console.log('item',item);
 		var flag = item.favoriteperson.indexOf(username)
 		if(flag>=0){
 			falg = 'cs'
@@ -110,7 +108,7 @@ function loadGoods() {
 				'<div class="si">' +
 				'<div class="napr">' +
 				'<p>' +
-				'<a href="#">' + item.goodsinfo + '</a>' +
+				'<a href="#">' + item.goodsinfo+','+item.goodsParams+ '</a>' +
 				'</p>' +
 				'<span>￥' + item.price + '</span>' +
 				'</div>' +
@@ -141,28 +139,24 @@ get(urlgoods).then((res) => {
 	loadGoods()
 
 })
-
-
 //点击收藏
 var flagf = 0
-
 $('#addUl').on('click','.favorite',function(){
-	if($(this).hasClass('cs')){
-		flagf = 0
-		$(this).toggleClass('cs',false);	
-	}else{
-		flagf = 1
-		$(this).toggleClass('cs',true);
-		 
+	var username = $('#loginStatus2').find('span').text()
+	if(username){
+		if($(this).hasClass('cs')){
+			flagf = 0
+			$(this).toggleClass('cs',false);	
+		}else{
+			flagf = 1
+			$(this).toggleClass('cs',true); 
+		}
 	}
-	// var username = $('#loginStatus2').find('span').text()
 	var id = $(this).attr('data-id')
-	console.log('id',id);
 	const data = {
 		flagf,
 		id
 	}
-	console.log(flagf);
 	post(urlfavorite,data).then(res => {
 		if (res.errno !== 0) {
 			alert('请登录后收藏该商品！')
@@ -179,24 +173,27 @@ $('#addUl').on('click','.addShopCar',function () {
 	var price = $(this).prev().find('span').text().trim()
 	var reg = /[0-9a-z]+/gi;
 	var goodsCount = 1
-	
-	console.log('username',username);
+	var username = $('#loginStatus2').find('span').text()
+	let crtTime = Date.now();
+
+	// console.log('username',username);
 	
 	price = price.match(reg).toString()
-	const data = {
+	const data = [{
 		goodsimgUrl,
 		goodsInfo,
 		goodsParams,
 		price,
 		goodsCount,
-		username
-	}
-	post(url2, data).then(res => {
-		if (res.errno !== 0) {
-			alert('请登录！')
-			return
-		}
-		alert('加入购物车成功！')
-
-	})
+		username,
+		crtTime
+	}]
+	console.log('data',data);
+	post(url2, data)
+	alert('加入购物车成功！')
 });
+//退出登录
+$quit.click(() => {
+	get(urlquit)
+	window.location='index.html'
+})
