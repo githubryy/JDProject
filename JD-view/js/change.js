@@ -121,8 +121,8 @@ function loadGoods() {
 		$('#addUl').append(goodsHtml)
 
 	})
-	
 	$('#addUl').append('<div class="cb"></div>')
+ 
 }
 var _this = this
 get(urlgoods).then((res) => {
@@ -138,8 +138,10 @@ get(urlgoods).then((res) => {
 	goodsList = data
 	
 	loadGoods()
-
+	 
 })
+ 
+
 //点击收藏
 var flagf = 0
 $('#addUl').on('click','.favorite',function(){
@@ -204,4 +206,28 @@ $quit.click(() => {
 $('.submit').on('click',function(){
 	var params = $('.text').val()
 	window.location='searchGoods.html?'+ params
+})
+var length = 0
+var num = 0
+setTimeout(()=>{
+	length=$('#addUl').children('ul').length
+},500)
+$('#changeGoods').on('click',function(){
+	console.log('length',length);
+	if(length-1>=6){
+		for(var i=num;i<num+6;i++){
+			$('#addUl').children('ul').eq(i).css("display","none")
+		}
+		length = length - 6
+		num+=6
+		
+		console.log('length',length);
+	}else if(length-1<=6){
+		num = 0
+		console.log('从头');
+		
+		$('#addUl').children('ul').css("display","block")
+		//没有商品了就会从一批开始
+		length=$('#addUl').children('ul').length
+	}
 })

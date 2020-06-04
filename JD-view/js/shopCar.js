@@ -401,7 +401,6 @@ $('.bottom-menu-include').on('click', '.submitData', function () {
         sessionObj[i].createtime = nowTime
         sessionObj[i].dataId = $('.goods-list-item:checked').eq(i).attr('data-id')
     }
-    console.log('sessionObj', sessionObj);
     const url = '/api/myorder/submitOrder'
     const data = sessionObj
     post(url, data).then(res => {

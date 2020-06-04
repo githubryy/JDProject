@@ -171,8 +171,8 @@ div#xq{margin-left: 100px;}
 	.bt h2{display: inline-block;}
 	.bt small{background: url(../image/shuaxin.jpg) 0 0px no-repeat;display: inline-block;width: 22px;height: 22px; position: relative;
 	    top: 9px;}
-	.six{height: 233px;margin-top: 40px;}
-	.six ul{width: 200.5px;height: 233px;	}
+	.six{height: 220px;margin-top: 40px;}
+	.six ul{width: 200.5px;height: 250px;	}
 	.si{ width: 200px;display: flex;margin-top: 20px;}
 	.si p{font-size: 14px;margin-bottom: 10px;  overflow: hidden;text-overflow: ellipsis;white-space:nowrap;}
 	.si span{color: red;font-size: 18px;margin-left: 27px;}

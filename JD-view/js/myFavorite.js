@@ -295,14 +295,11 @@ var goodsCount = 1
 var shopCarObj = []
 var momentObj = { goodsInfo, price, goodsParams, username,goodsimgUrl,goodsCount, crtTime }
 $('.bottom-menu-include').on('click', '.submitData', function () {
-    if (!$('.submitData').hasClass('submitDis')) {
-        // window.location.href = "shopCar.html"
-    }
     let nowTime = Date.now();
     const url = '/api/myorder/addShopCar'
     const data = shopCarObj
-    
-
+    if (!$('.submitData').hasClass('submitDis')) {
+        
     for (let i = 0; i < $('.goods-list-item:checked').length; i++) {
         //获取当前时间毫秒数
         shopCarObj.push({ ...momentObj })
@@ -313,16 +310,14 @@ $('.bottom-menu-include').on('click', '.submitData', function () {
         shopCarObj[i].username = $('#username').text()
         shopCarObj[i].crtTime = nowTime
         console.log('shopCarObj',shopCarObj);
+    }   
+        post(url, data) 
+        alert('加入购物车成功！')
+
+        window.location.href = "shopCar.html"
     }
-        post(url, data).then(res => {
-            if (res.errno === 0) {
-                // 插入成功
-                alert(res.message)
-            } else {
-                // 插入失败
-                alert(res.message)
-            }
-        })
+   
+    
 
     
 })
