@@ -192,17 +192,14 @@ $('#handleComment').click(() => {
         crtTime
     }
     if(content===''){
-        console.log(1);
+         alert('发表评论不能为空！')
         return
     }
     console.log(1);
-     post(urlHandleComment,data).then(res=>{
-    if (res.errno !== 0) {
-        alert('操作错误')
-        return
-    }
-    // location.href = location.href
-     })
+     post(urlHandleComment,data) 
+     
+        location.href = location.href
+      
 })
 
 

@@ -70,7 +70,7 @@ const getGoodsCommentsList = (pGoodsinfo) => {
         WHERE
             g.goodsinfo = '${pGoodsinfo}'`
 
-    sql += ` order by crtTime desc;`
+    sql += ` order by crtTime ASC;`
     // 返回 promise
 
     // console.log('sql',sql);
@@ -187,17 +187,17 @@ const handleComment = (pushObj = {}) => {
                     const sql4 = `select commentPerson from goods where goodsinfo = '${pushObj.goodsinfo}'`
                     exec(sql4).then(res=>{
                        var username =  res[0].commentPerson
-                       console.log('username',username);
+                    //    console.log('username',username);
                         var arr =  username.split(',')
-                        console.log('1111',arr.indexOf(pushObj.username));
+                        // console.log('1111',arr.indexOf(pushObj.username));
                         if(arr.indexOf(pushObj.username)<0){
                             var arrlength = arr.length + 1
                             arr.push(pushObj.username)
                             var arrString =arr.toString()
-                            console.log('arrString',arrString);
-                            console.log('arrlength',arrlength);
+                            // console.log('arrString',arrString);
+                            // console.log('arrlength',arrlength);
                             const sql5 = `update goods set commentCount = ${arrlength},commentPerson ='${arrString}' where goodsinfo = '${pushObj.goodsinfo}'`
-                            console.log('sql5',sql5);
+                            // console.log('sql5',sql5);
                             
                                return exec(sql5)
                         }
