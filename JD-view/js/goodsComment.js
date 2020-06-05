@@ -41,6 +41,9 @@ let urlUser = '/api/user/access?'
 let urlgoodsList = '/api/myorder/goodslist?'
 let urlComment = '/api/myorder/comment?'
 let params = window.location.search.split('?')[1] || ''
+let paramsId = window.location.search.split('?')[2] || ''
+
+
 const urlParams = getUrlParams(urlgoodsList)
 if (urlParams.keyword) {
     urlComment += '&keyword=' + urlParams.keyword
@@ -55,7 +58,7 @@ function initLoad() {
         // 遍历博客列表，并显示
         const data = res.data || []
         $('.top-news').empty()
-        console.log('data11111111', data);
+
         goodsList = data
         loadGoods()
     })
@@ -82,46 +85,67 @@ function loadGoods() {
                 '</a>'
             $('.top-news').append(goodsHtml)
         }
-        // console.log('i',i);
 
     })
-  
-    
+
+
 }
 function loadCommentGoodsinfo() {
-    
+
     var releaseDate = getFormatDate(goodsList[0].crtTime) || ''
-    console.log('releaseDate', releaseDate);
-    console.log('goodsList', goodsList);
+
     $('#goodsinfo').text(goodsList[0].goodsinfo)
-    $('#goodsimg').attr('src',goodsList[0].goodsimgUrl)
-    
-    console.log('goodsList[0].categories',goodsList[0].categories);
+    $('#goodsimg').attr('src', goodsList[0].goodsimgUrl)
+
+
     //商品类别
-    var goodsCategories=goodsList[0].categories.split(',')
-    goodsCategories.forEach(item=>{
-            
-         $('#categories').append($(`
+    var goodsCategories = goodsList[0].categories.split(',')
+    goodsCategories.forEach(item => {
+
+        $('#categories').append($(`
          <a href="#">${item}</a>`))
     })
     //评论过该商品的人
-    var commentPerson=goodsList[0].commentPerson.split(',')
+    var commentPerson = goodsList[0].commentPerson.split(',')
     $('#commentPerson').empty()
-    console.log('commentPerson',commentPerson);
-    
-    commentPerson.forEach(item=>{
-        var urlCommentUser = '/api/user/access?commentUser='+item
-        get(urlCommentUser).then(res=>{
-            console.log('res.data[0]',res.data[0]);
+    // console.log('commentPerson',commentPerson);
+    commentPerson.forEach(item => {
+        var urlCommentUser = '/api/user/access?commentUser=' + item
+        get(urlCommentUser).then(res => {
+            // console.log('res.data[0]',res.data[0]);
             $('#commentPerson').append($(`
-            <li><a href="#"><img alt="" src="${res.data[0].userImgurl?res.data[0].userImgurl:''}"></a></li>`))
+            <li><a href="#"><img alt="" src="${res.data[0].userImgurl ? res.data[0].userImgurl : ''}"></a></li>`))
         })
-       
-   })
+
+    })
     $('#releaseDate').append(releaseDate)
-    $('#commentsCount').append(goodsList[0].commentCount+'条评论')
+    $('#commentsCount').append(goodsList[0].commentCount + '条评论')
     $('#goodsParams').append(goodsList[0].goodsParams)
-    
+    //获取评论
+    var urlCommentsList = '/api/myorder/getGoodsCommentsList?pGoodsinfo=' + params
+    $('#comments').empty()
+    get(urlCommentsList).then(res => {
+        if (res.data.length < 1) {
+            // console.log(1);
+            $('#comments').append('<h1>暂无该商品的评论信息,快来评论吧!</h1>')
+        }
+        console.log('res', res.data);
+        res.data.forEach(item => {
+            $('#comments').append($(`
+            <div class="media">	
+            <a href="#" class="pull-left">
+                <img alt="" src="${item.userImgurl}" class="media-object">
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading">${item.username}<span>${getFormatDate(item.crtTime) || ''}</span></h4>
+                <p> ${item.comment}. </p>
+            </div>
+        </div>
+        <hr>
+            `))
+        })
+    })
+
 }
 get(urlUser).then((res) => {
     if (res.errno !== 0) {
@@ -137,8 +161,8 @@ get(urlUser).then((res) => {
     .then(() => {
         if (params || params === '') {
             urlgoodsList += 'goodsinfo=' + params
-            console.log('urlgoodsList',urlgoodsList);
-            
+
+
             get(urlgoodsList).then(res => {
                 if (res.errno !== 0) {
                     alert('数据错误')
@@ -154,20 +178,32 @@ get(urlUser).then((res) => {
         }
     })
 
-
-
-
-// 搜索
-// $btnSearch.click(() => {
-//     // console.log('urlgoodsList',urlgoodsList);
-//     const keyword = $textKeyword.val()
-//     console.log('keyword', keyword);
-//     if (keyword || keyword === '') {
-//         urlgoodsList += 'keyword=' + keyword
-//         initLoad(urlgoodsList)
-//         urlgoodsList = '/api/myorder/goodslist?'
-//     }
-// })
+// 发表评论
+$('#handleComment').click(() => {
+    var crtTime = new Date().getTime()
+    var content = $('#pushDetail').val()
+    var goodsinfo = $('#goodsinfo').text()
+    var username = $('#username').text()
+    let urlHandleComment = '/api/myorder/handleComment'
+    const data = {
+        content,
+        goodsinfo,
+        username,
+        crtTime
+    }
+    if(content===''){
+        console.log(1);
+        return
+    }
+    console.log(1);
+     post(urlHandleComment,data).then(res=>{
+    if (res.errno !== 0) {
+        alert('操作错误')
+        return
+    }
+    // location.href = location.href
+     })
+})
 
 
 

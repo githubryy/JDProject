@@ -6,7 +6,7 @@ const loginCheck = require('../middleware/loginCheck')
 router.post('/login', function(req, res, next) {
     let sessionUsername = req.session.username || ''
 
-    const { username, password } = req.bodyU
+    const { username, password } = req.body
     if(req.body.username=sessionUsername){
         console.log('存在');
         
@@ -31,13 +31,13 @@ router.post('/login', function(req, res, next) {
 router.get('/access', loginCheck,(req, res, next) => {
     let username = req.session.username || ''
     let commentUser = req.query.commentUser || ''
-    console.log('username', req.query.commentUser || '');
+    console.log('username', req.query.username || '');
 
     if (req.query.isadmin) {
-        // console.log('is admin')
+        console.log('is admin')
         // 管理员界面
         if (req.session.username == null) {
-            // console.error('is admin, but no login')
+            console.error('is admin, but no login')
             // 未登录
             res.json(
                 new ErrorModel('未登录')

@@ -5,13 +5,15 @@ const {
     getList,
     getShopCarList,
     getOrderSessionList,
+    getGoodsCommentsList,
     submitOrder,
     orderPay,
     addShopCar,
     getDetail,
     editFavorite,
     delShopCar,
-    delFavorite
+    delFavorite,
+    handleComment
 } = require('../controller/myorder')
 const { SuccessModel, ErrorModel } = require('../model/resModel')
 const loginCheck = require('../middleware/loginCheck')
@@ -95,7 +97,16 @@ router.get('/getOrderSessionList', loginCheck, (req, res, next) => {
         )
     })
 });
-
+router.get('/getGoodsCommentsList', loginCheck, (req, res, next) => {
+    const pGoodsinfo = req.query.pGoodsinfo || ''
+    const result = getGoodsCommentsList(pGoodsinfo)
+    return result.then(listData => {
+        console.log('listData', listData);
+        res.json(
+            new SuccessModel(listData)
+        )
+    })
+});
 router.post('/submitOrder', loginCheck, (req, res, next) => {
 
     const result = submitOrder(req.body)
@@ -106,8 +117,7 @@ router.post('/orderPay', loginCheck, (req, res, next) => {
     return result
 });
 router.post('/addShopCar', loginCheck, (req, res, next) => {
-     return addShopCar(req.body)
-       
+     return addShopCar(req.body)   
 });
 router.get('/detail', (req, res, next) => {
     const result = getDetail(req.query.id)
@@ -151,5 +161,9 @@ router.post('/delFavorite', loginCheck, (req, res, next) => {
         }
     })
 })
-
+router.post('/handleComment', loginCheck, (req, res, next) => {
+    
+handleComment(req.body)
+    
+})
 module.exports = router;

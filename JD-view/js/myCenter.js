@@ -97,7 +97,7 @@ function orderLoad(url) {
 
                 <td class="hidden-480 ">
 
-                <button data-id="${item.name}" data-trigger="hover" data-placement="left" 
+                <button data-id="${item.name+'?'+item.id}" data-trigger="hover" data-placement="left" 
 
                 data-content='${item.rcvaddress}' data-original-title="收货地址" 
                 

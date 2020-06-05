@@ -12,7 +12,7 @@ const access = (username,commentUser) => {
         sql = `select * from users where username ='${commentUser}' `
     }
     // 返回 promise
-    console.log('sql',sql);
+ 
     return exec(sql)
 }
 const login = (username, password) => {
@@ -25,9 +25,9 @@ const login = (username, password) => {
     const sql = `
         select username, email from users where username=${username} and password=${password}
     `
-    // console.log('sql is', sql)
+    
     return exec(sql).then(rows => {
-        console.log(rows[0], 'loginRows');
+      
         return rows[0] || {}
     })
 }
@@ -46,7 +46,7 @@ const register = (username, password, email) => {
         values (${username},${password},${email})
     `
     return exec(sql).then(rows => {
-        // console.log('rows',)
+   
         if (rows[0]) {
             const message = false
             return message
@@ -88,10 +88,8 @@ const editInfo = (id, editData = {}) => {
         userImgurl='${img1Edit}' 
         where id=${id}
     `
-    // console.log(1111,sql);
-    
     return exec(sql).then(updateData => {
-        // console.log('updateData is ', updateData)
+      
         if (updateData.affectedRows > 0) {
             return true
         }

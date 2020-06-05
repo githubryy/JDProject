@@ -1,7 +1,7 @@
 const xss = require('xss')
 const { exec } = require('../db/mysql')
 
-const getGoodsList = (username,keyword,goodsinfo) => {
+const getGoodsList = (username, keyword, goodsinfo) => {
     let sql = `select * from goods where 1=1  `
     if (username) {
         sql += `and goods.favoriteperson like '%${username}%' `
@@ -9,15 +9,15 @@ const getGoodsList = (username,keyword,goodsinfo) => {
     if (keyword) {
         sql += `and goodsinfo like '%${keyword}%' `
     }
-    if (goodsinfo){
+    if (goodsinfo) {
         sql += `and goodsinfo = '${goodsinfo}' `
     }
     sql += `order by storageNum desc;`
     // 返回 promise
-    
-       
-        
- 
+
+
+
+
     return exec(sql)
 }
 const getList = (username, keyword) => {
@@ -57,6 +57,26 @@ const getOrderSessionList = () => {
     // 返回 promise
     return exec(sql)
 }
+const getGoodsCommentsList = (pGoodsinfo) => {
+    let sql = `SELECT
+            c.crtTime,
+            c.comment,
+            u.username,
+            u.userImgurl
+        FROM
+            comments c
+            JOIN users u ON c.person_id = u.id
+            JOIN goods g ON c.goods_id = g.id 
+        WHERE
+            g.goodsinfo = '${pGoodsinfo}'`
+
+    sql += ` order by crtTime desc;`
+    // 返回 promise
+
+    // console.log('sql',sql);
+
+    return exec(sql)
+}
 const submitOrder = (sessionObj = {}) => {
     //在插入数据前删除表里面所有数据避免重复
     const sql2 = `delete from ordersession`
@@ -93,19 +113,19 @@ const orderPay = (orderdata = {}) => {
 
 }
 const addShopCar = (addShopCar = {}) => {
-    // console.log('addShopCar',addShopCar);
-    return addShopCar.forEach(item =>{
+
+    return addShopCar.forEach(item => {
         const sql = ` insert into shopCar (goodsInfo, goodsParams, price, goodsimgUrl,goodsCount,username,crtTime)
         values ('${item.goodsInfo}', '${item.goodsParams}', ${item.price},'${item.goodsimgUrl}', '${item.goodsCount}','${item.username}','${item.crtTime}')`
-        
+
         return exec(sql).then(delData => {
-            // console.log('delData is ', delData)
+
             if (delData.affectedRows > 0) {
                 return true
             }
             return false
         })
-    })  
+    })
 }
 const getDetail = (id) => {
     const sql = `select * from myorder where id='${id}'`
@@ -132,12 +152,61 @@ const delShopCar = (id, username) => {
     // id 就是要删除收藏商品的id
     const sql = `delete from shopCar where id='${id}' and username='${username}';`
     return exec(sql).then(delData => {
-        // console.log('delData is ', delData)
+
         if (delData.affectedRows > 0) {
             return true
         }
         return false
     })
+}
+const handleComment = (pushObj = {}) => {
+    // console.log('pushObj', pushObj);
+
+    const comment = xss(pushObj.content)
+    const sql = `select id from users where username = '${pushObj.username}'`
+    const sql2 = `select id from goods where goodsinfo = '${pushObj.goodsinfo}'`
+    var person_id = null
+    var goods_id = null
+    exec(sql).then(res => {
+        // console.log('1111111', res[0].id);
+        person_id = res[0].id
+    })
+        .then(() => {
+            exec(sql2).then(res => {
+                goods_id = res[0].id
+            }).then(() => {
+                const sql3 = `insert into comments (crtTime,comment,person_id,goods_id)
+                values ('${pushObj.crtTime}','${comment}',${person_id},${goods_id})`
+                // console.log('sql3',sql3);
+                return exec(sql3).then(delData => {
+                    if (delData.affectedRows > 0) {
+                        return true
+                    }
+                    return false
+                }).then(()=>{
+                    const sql4 = `select commentPerson from goods where goodsinfo = '${pushObj.goodsinfo}'`
+                    exec(sql4).then(res=>{
+                       var username =  res[0].commentPerson
+                       console.log('username',username);
+                        var arr =  username.split(',')
+                        console.log('1111',arr.indexOf(pushObj.username));
+                        if(arr.indexOf(pushObj.username)<0){
+                            var arrlength = arr.length + 1
+                            arr.push(pushObj.username)
+                            var arrString =arr.toString()
+                            console.log('arrString',arrString);
+                            console.log('arrlength',arrlength);
+                            const sql5 = `update goods set commentCount = ${arrlength},commentPerson ='${arrString}' where goodsinfo = '${pushObj.goodsinfo}'`
+                            console.log('sql5',sql5);
+                            
+                               return exec(sql5)
+                        }
+                
+                    })
+
+                })
+            })
+        })
 }
 
 module.exports = {
@@ -145,10 +214,12 @@ module.exports = {
     getList,
     getShopCarList,
     getOrderSessionList,
+    getGoodsCommentsList,
     submitOrder,
     orderPay,
     addShopCar,
     getDetail,
     editFavorite,
-    delShopCar
+    delShopCar,
+    handleComment
 }
