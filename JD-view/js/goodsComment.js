@@ -13,6 +13,10 @@ function post(url, data = {}) {
 }
 // 显示格式化的时间
 function getFormatDate(dt) {
+    return moment(dt).format('YYYY-MM-DD HH:mm:ss')
+}
+// 显示格式化的时间
+function getFormatDate(dt) {
     return moment(dt).format('LL')
 }
 // 获取 url 参数
@@ -65,7 +69,7 @@ function loadGoods() {
             var goodsHtml =
                 '<a href="#" class="btn ' + classColor + '" style="display: flex">' +
                 '<div style="display: flex;flex-direction: column;justify-content: space-around;">' +
-                '<span>' + item.goodsinfo + '</span>' +
+                '<span style=" width:300px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"">' + item.goodsinfo + '</span>' +
                 '<em style="width: 280px;height:40px;overflow: hidden;text-overflow:ellipsis;">' + item.goodsParams + '</em>' +
                 '<em>' +
                 '<i class="icon-tags"></i>'
@@ -73,7 +77,7 @@ function loadGoods() {
                 '</em>' +
                 '</div >' +
                 '<div class="span4" >' +
-                '<img style="width: 85px;height: 105px;" src="' + item.goodsimgUrl + '">' +
+                '<img style="width: 105px;height: 105px;" src="' + item.goodsimgUrl + '">' +
                 ' </div>' +
                 '</a>'
             $('.top-news').append(goodsHtml)
@@ -81,10 +85,43 @@ function loadGoods() {
         // console.log('i',i);
 
     })
+  
+    
 }
 function loadCommentGoodsinfo() {
+    
+    var releaseDate = getFormatDate(goodsList[0].crtTime) || ''
+    console.log('releaseDate', releaseDate);
     console.log('goodsList', goodsList);
-
+    $('#goodsinfo').text(goodsList[0].goodsinfo)
+    $('#goodsimg').attr('src',goodsList[0].goodsimgUrl)
+    
+    console.log('goodsList[0].categories',goodsList[0].categories);
+    //商品类别
+    var goodsCategories=goodsList[0].categories.split(',')
+    goodsCategories.forEach(item=>{
+            
+         $('#categories').append($(`
+         <a href="#">${item}</a>`))
+    })
+    //评论过该商品的人
+    var commentPerson=goodsList[0].commentPerson.split(',')
+    $('#commentPerson').empty()
+    console.log('commentPerson',commentPerson);
+    
+    commentPerson.forEach(item=>{
+        var urlCommentUser = '/api/user/access?commentUser='+item
+        get(urlCommentUser).then(res=>{
+            console.log('res.data[0]',res.data[0]);
+            $('#commentPerson').append($(`
+            <li><a href="#"><img alt="" src="${res.data[0].userImgurl?res.data[0].userImgurl:''}"></a></li>`))
+        })
+       
+   })
+    $('#releaseDate').append(releaseDate)
+    $('#commentsCount').append(goodsList[0].commentCount+'条评论')
+    $('#goodsParams').append(goodsList[0].goodsParams)
+    
 }
 get(urlUser).then((res) => {
     if (res.errno !== 0) {
@@ -107,7 +144,7 @@ get(urlUser).then((res) => {
                     alert('数据错误')
                     return
                 }
-                $('#goodsinfo').empty()
+                // $('#goodsinfo').empty()
                 const data = res.data || []
                 goodsList = data
                 loadCommentGoodsinfo()

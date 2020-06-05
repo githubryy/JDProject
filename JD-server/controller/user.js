@@ -1,14 +1,18 @@
 const { exec, escape } = require('../db/mysql')
 const { genPassword } = require('../utils/cryp')
 const xss = require('xss')
-const access = (username) => {
+const access = (username,commentUser) => {
 
     let sql = `select * from users where 1=1 `
     if (username) {
         sql += `and username='${username}' `
     }
-    // 返回 promise
+    if (commentUser) {
 
+        sql = `select * from users where username ='${commentUser}' `
+    }
+    // 返回 promise
+    console.log('sql',sql);
     return exec(sql)
 }
 const login = (username, password) => {

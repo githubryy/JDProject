@@ -15,7 +15,7 @@ const getGoodsList = (username,keyword,goodsinfo) => {
     sql += `order by storageNum desc;`
     // 返回 promise
     
-        console.log('sql',sql);
+       
         
  
     return exec(sql)
