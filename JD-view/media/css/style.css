@@ -4898,6 +4898,8 @@ Top News Blocks(new in v1.2.2)
 .top-news {
   color: #fff;
   margin: 8px 0;
+  height: 670px;
+  overflow: hidden;
 }
 
 .top-news a,
@@ -5315,4 +5317,7 @@ Datatables Plugin(in v1.3)
 .dataTable .details tr:nth-child(even) th {
   background-color: #eee !important;
 }
-
+#comments{
+  height: 500px;
+  overflow: auto;
+}

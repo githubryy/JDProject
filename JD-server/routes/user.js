@@ -4,7 +4,13 @@ const { access,login,register,editInfo} = require('../controller/user')
 const { SuccessModel, ErrorModel } = require('../model/resModel')
 const loginCheck = require('../middleware/loginCheck')
 router.post('/login', function(req, res, next) {
-    const { username, password } = req.body
+    let sessionUsername = req.session.username || ''
+
+    const { username, password } = req.bodyU
+    if(req.body.username=sessionUsername){
+        console.log('存在');
+        
+    }
     const result = login(username, password)
     return result.then(data => {  
         if (data.username) {

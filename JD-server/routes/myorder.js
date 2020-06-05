@@ -19,7 +19,9 @@ const loginCheck = require('../middleware/loginCheck')
 router.get('/goodslist', (req, res, next) => {
     const username = req.query.username || ''
     const keyword = req.query.keyword || ''
-    const result = getGoodsList(username, keyword)
+    const goodsinfo = req.query.goodsinfo || ''
+     console.log('keyword', goodsinfo);
+    const result = getGoodsList(username,keyword,goodsinfo)
     return result.then(listData => {
         // console.log('getGoodsList', listData);
         res.json(

@@ -97,15 +97,15 @@ function orderLoad(url) {
 
                 <td class="hidden-480 ">
 
-                <button data-trigger="hover" data-placement="left" 
+                <button data-id="${item.name}" data-trigger="hover" data-placement="left" 
 
                 data-content='${item.rcvaddress}' data-original-title="收货地址" 
                 
-                class="popovers btn mini blue item-seeAddress">
+                class="popovers btn mini blue item-seeAddress comments">
 
                 <i class="icon-comments"></i> 评论 </button> |
 
-                <a data-id="${item.id}" class="btn mini black item-del"><i class="icon-trash"></i> 删除记录</a>
+                <a data-id="${item.goodsinfo}" class="btn mini black item-del"><i class="icon-trash"></i> 删除记录</a>
                 
                 </td>
 
@@ -168,3 +168,14 @@ $quitchange.click(() => {
     get(url)
 
 })
+//商品评论
+setTimeout(()=>{
+    console.log('comments',$('.comments'));
+},1000)
+$('#sample_1').on('click','.comments',function(){
+    console.log('data-id',$(this).attr('data-id'));
+    var params = $(this).attr('data-id')
+    // console.log('params',params);
+    window.location = 'goodsComment.html?'+params
+})
+

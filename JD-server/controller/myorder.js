@@ -1,7 +1,7 @@
 const xss = require('xss')
 const { exec } = require('../db/mysql')
 
-const getGoodsList = (username, keyword) => {
+const getGoodsList = (username,keyword,goodsinfo) => {
     let sql = `select * from goods where 1=1  `
     if (username) {
         sql += `and goods.favoriteperson like '%${username}%' `
@@ -9,8 +9,15 @@ const getGoodsList = (username, keyword) => {
     if (keyword) {
         sql += `and goodsinfo like '%${keyword}%' `
     }
-    sql += `order by id desc;`
+    if (goodsinfo){
+        sql += `and goodsinfo = '${goodsinfo}' `
+    }
+    sql += `order by storageNum desc;`
     // 返回 promise
+    
+        console.log('sql',sql);
+        
+ 
     return exec(sql)
 }
 const getList = (username, keyword) => {

@@ -64,7 +64,7 @@ get(url).then(res => {
 		$loginStatus.append($(`    
 		<span>您好,</span>
 		<a class="myCenterHref" href="/myCenter.html?username=${res.data[0].username}">
-			<a id="usernameId">${res.data[0].username}</a>
+			<a href="personinfo.html" id="usernameId">${res.data[0].username}</a>
 			<div class="divCircle">
                 <img class="circleImg"
                 src="${res.data[0].userImgurl ? res.data[0].userImgurl : "media/image/avitor.png"}" />
@@ -130,7 +130,7 @@ get(urlgoods).then((res) => {
 		alert('商品加载数据错误')
 		return
 	}
-	// 遍历博客列表，并显示
+	
 	const data = res.data || []
 
 	$addUl.empty()
@@ -212,6 +212,7 @@ var num = 0
 setTimeout(()=>{
 	length=$('#addUl').children('ul').length
 },500)
+//换一批
 $('#changeGoods').on('click',function(){
 	console.log('length',length);
 	if(length-1>=6){
