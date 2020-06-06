@@ -118,7 +118,7 @@ function edit() {
             return
         }
         alert('更新成功')
-        location.href = 'personInfo.html'
+        // location.href = 'personInfo.html'
     })
 
 }
