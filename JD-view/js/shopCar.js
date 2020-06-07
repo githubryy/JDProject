@@ -2,7 +2,6 @@
 function get(url) {
     return $.get(url)
 }
-//asdsads
 // 发送 post 请求
 function post(url, data = {}) {
     return $.ajax({
