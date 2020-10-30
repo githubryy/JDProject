@@ -17,7 +17,7 @@ const access = (username,commentUser) => {
 }
 const login = (username, password) => {
     //sql注入
-    username = escape(username)
+    // username = escape(username)
 
     // 生成加密密码
     password = genPassword(password)
@@ -62,7 +62,7 @@ const editInfo = (id, editData = {}) => {
     // id 就是要更新博客的 id
     // blogData 是一个博客对象，包含 title content 属性
   
-     xss脚本攻击
+    //  xss脚本攻击
     const realname = xss(editData.realname)
     const birthday = xss(editData.birthday)
     const sex = xss(editData.sex)

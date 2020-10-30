@@ -19,7 +19,7 @@ var Login = function () {
 				rules: {
 					username: {
 						minlength: 4,
-						maxlength: 20,
+						maxlength: 30,
 						required: true
 					},
 					password: {
